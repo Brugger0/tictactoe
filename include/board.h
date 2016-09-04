@@ -9,12 +9,17 @@ namespace game
 
     class Board
     {
-        std::vector<std::vector<char>> tiles;
+    private:
+        std::vector<std::vector<char>> tiles_;
 
     public:
         static const int BOARD_SIZE;
 
         Board();
+
+        void setElement(int x, int y, char value);
+        char getElement(int x, int y);
+
         std::string toString();
     };
 
