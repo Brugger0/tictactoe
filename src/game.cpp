@@ -10,13 +10,8 @@ Game::Game()
 {
     for (int i = 0; i < NUM_OF_PLAYERS; i++)
     {
-        Game::players_.push_back(Player(Game::SYMBOL_LIST[i]));
+        Game::players_.push_back(Player(Game::SYMBOL_LIST[i],&board_));
     }
-}
-
-void Game::playerMove (Player player, int x, int y)
-{
-    Game::board_.setElement(x, y, player.getSymbol());
 }
 
 bool Game::checkWin (Player player, int x, int y)
@@ -45,24 +40,25 @@ bool Game::checkWin (Player player, int x, int y)
 
 void Game::startGame()
 {
+    bool game_finished = false;
+
     std::cout << this->boardStatus();
     std::cout << "\n";
-    this->playerMove(players_[0],0,0);
-    std::cout << this->boardStatus();
-    std::cout << this->checkWin(players_[0],0,0) << "\n\n";
-    this->playerMove(players_[1],1,0);
-    std::cout << this->boardStatus();
-    std::cout << this->checkWin(players_[1],1,0) << "\n\n";
-    this->playerMove(players_[0],0,1);
-    std::cout << this->boardStatus();
-    std::cout << this->checkWin(players_[0],0,1) << "\n\n";
-    this->playerMove(players_[1],1,1);
-    std::cout << this->boardStatus();
-    std::cout << this->checkWin(players_[1],1,1) << "\n\n";
-    this->playerMove(players_[0],0,2);
-    std::cout << this->boardStatus();
-    std::cout << this->checkWin(players_[0],0,2) << "\n\n";
 
+    while (!game_finished)
+    {
+        for (int i=0; !game_finished && i<Game::NUM_OF_PLAYERS; i++)
+        {
+            int move_x, move_y;
+
+            std::cin >> move_x;
+            std::cin >> move_y;
+
+            players_[i].playerMove(move_x, move_y);
+            std::cout << this->boardStatus();
+            game_finished = this->checkWin(players_[i], move_x, move_y);
+        }
+    }
 }
 
 std::string Game::boardStatus()

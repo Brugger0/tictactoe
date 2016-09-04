@@ -21,7 +21,6 @@ namespace game
 
         Game();
 
-        void playerMove(Player player, int x, int y);
         bool checkWin(Player player, int x, int y);
 
         void startGame();
