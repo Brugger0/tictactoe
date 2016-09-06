@@ -3,8 +3,8 @@
 
 #include <vector>
 #include <string>
-#include <board.h>
-#include <player.h>
+#include <game/board.h>
+#include <game/player.h>
 
 namespace game
 {

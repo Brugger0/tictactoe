@@ -18,7 +18,7 @@ $(TARGET): $(OBJECTS)
 	@$(CC) $^ -o $(TARGET) $(LDFLAGS)
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
-	@mkdir -p $(BUILDDIR)
+	@mkdir -p $(BUILDDIR) $(shell dirname $@)
 	@$(CC) $(CFLAGS) $(LDFLAGS) $(INC) -c -o $@ $<
 
 clean:
